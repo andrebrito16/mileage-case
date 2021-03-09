@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="/static/styles.css">
+    <title>{{ title }}</title>
+</head>
+<style>
+    
+</style>
+<body>
+    <main>
+        <div class="listagem">
+            <h3>Listagem dos carros: </h2>
+            <div class="grid-container">
+                <div class="grid-item-header">
+                    Modelo
+                </div>
+                <div class="grid-item-header">
+                    Motor
+                </div>
+                <div class="grid-item-header">
+                    Marca
+                </div>
+                <div class="grid-item-header">
+                    Valocidade Máxima
+                </div>
+                {% for carro in carros: %}
+                <div class="grid-item">
+                        {{ carro['modelo'] }}
+                </div>
+                <div class="grid-item">
+                        {{carro['motor']}}
+                </div>
+                <div class="grid-item">
+                        {{carro['marca']}} 
+                </div>
+                <div class="grid-item">
+                        {{carro['velocidade_max']}}
+                </div>
+                {% endfor %}
+            </div>
+            <div class="button-charts">
+                <a href="/charts">Ver os gráficos</a>
+            </div>
+            
+        </div>
+        
+        <div id="inputs">
+            <div class="trocar-motor">
+                <h3>Trocar o motor</h2>
+                <form action = "/api/change" method = "post">
+                    <p><input type = "text" name = "model" placeholder="Insira o modelo que deseja substituir"/></p>
+                    <p><input type = "number" step="0.1" name = "engine" placeholder="2.0"/></p>
+                    <p><input type = "submit" value = "Trocar" id="button"/></p>
+                 </form>
+        
+        
+            </div>
+        
+            <div class="filtrar">
+                <h3>Filtrar os carros pelo motor</h2>
+                <form action = "/api/motor" method = "get">
+                    <p><input type="string"  name = "tipo" placeholder="Motor"/></p>
+                    <p><input type = "submit" value = "Filtrar" id="button"/></p>
+                 </form>
+                 
+            </div>
+        
+            <div class="deletar">
+                <h3>Deletar um modelo</h2>
+                <form action = "/api/delete" method = "post">
+                    <p><input type="string"  name = "model" placeholder="Modelo para deletar"/></p>
+                    <p><input type = "submit" value = "Deletar" /></p>
+                 </form>
+            </div>
+
+            <div class="add-carro">
+                <h3>Adicionar um novo modelo</h2>
+                <form action = "/api/add" method = "post">
+                    <p><input type = "text" name = "model" placeholder="Modelo"/></p>
+                    <p><input type="number" step="0.1" min="1" name = "vmax" placeholder="Velocidade Máxima"/></p>
+                    <p><input type="number" step="0.1" name = "engine" placeholder="Motor"/></p>
+                    <p><input type = "text" name = "marca" placeholder="Marca"/></p>
+                    <p><input type = "submit" value = "Adicionar" id="button"/></p>
+                 </form>
+            </div>
+        </div>
+        
+    </main>
+</body>
+</html>
